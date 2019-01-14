@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <style>
+        *{
+            padding:0;
+            margin: 0;
+        }
+        #app{
+            width: 600px;
+            margin: 50px auto 0;
+        }
+        h2{
+            padding-left: 10px; 
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 20px;
+            color: #fff;
+            background: #000;            
+        }
+        h2.red{
+            background: red;
+        }
+        ul{
+            display: none;
+        }
+        ul li{
+            padding-left: 10px; 
+            width: 200px;
+            height: 40px;
+            font-size: 18px;
+            line-height: 40px;
+            list-style: none;
+            background: #ccc;      
+            color: #fff;
+        }
+        ul li.lis{
+            background: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="app">
+        <div v-for="time,index in list">
+            <h2 :class="{red:indexs===index}" @click="fnds(index)">{{time.title}}</h2>
+            <ul :style="{display:indexs===index?'block':'none'}">
+                <li v-for=" mos,indea in time.newlst" :class="{lis:indea===mos.jiaod}" @click="nos(index,indea)">{{mos.newtitle}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+    
+        new Vue({
+            el:'#app',
+            data:{
+                list:[
+                    {
+                        title:'好友列表1',
+                        newlst:[
+                            {
+                                newtitle:'好友1',
+                                jiaod:-1
+                            },
+                            {
+                                newtitle:'好友2',
+                                jiaod:-1
+                            },
+                            {
+                                newtitle:'好友3',
+                                jiaod:-1
+                            }
+                        ]
+                    },
+                    {
+                        title:'好友列表2',
+                        newlst:[
+                            {
+                                newtitle:'好友1',
+                                jiaod:-1
+                            },
+                            {
+                                newtitle:'好友2',
+                                jiaod:-1
+                            },
+                            {
+                                newtitle:'好友3',
+                                jiaod:-1
+                            }
+                        ]
+                    },
+                    {
+                        title:'好友列表3',
+                        newlst:[
+                            {
+                                newtitle:'好友1',
+                                jiaod:-1
+                            },
+                            {
+                                newtitle:'好友2',
+                                jiaod:-1
+                            },
+                            {
+                                newtitle:'好友3',
+                                jiaod:-1
+                            }
+                        ]
+                    }
+                ]
+            ,
+            indexs:-1
+            },
+            methods:{
+                fnds(i){
+
+                   this.indexs=this.indexs===i?-1:i; 
+                },
+                nos(k,j){
+                    
+                    this.list[k].newlst[j].jiaod=this.list[k].newlst[j].jiaod===j?-1:j;
+                }
+            }
+        });    
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    
+<div id="app">
+    <input type="text" v-model='message'>
+    <p>{{message}}</p>
+    <ul>
+        <li v-for=' time,index in list' :style='fun(index)'>{{time}}</li>
+    </ul>
+</div>
+
+    <script>
+    
+        new Vue({
+            el:'#app',
+            data:{
+                message:'hello world',
+                list:[1,2,3,4,5,6]
+            },
+            computed:{
+                reverseM:{
+                    get(){
+                    console.log('执行一次')
+                    this.message.split().reverse().join();
+                    },
+                    set(newzhi){
+                        console.log(newzhi);
+                    }
+                }
+            },
+            methods:{
+                fun(i){
+                    if(i%2===0){
+                         return {'color':'red'}   
+                    }else{
+                        return {'color':'yellow'}   
+                    }
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

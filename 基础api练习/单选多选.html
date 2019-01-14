@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <p v-for="time in list"><input type="checkbox" v-model="time.checked">{{time.title}}</p>
+        <hr/>
+        <input type="checkbox" v-model='randoms'>全选
+    </div>
+
+    <script>
+    
+        new Vue({
+            el:'#app',
+            data:{
+                list:[
+                    {
+                        title:'蛮王',
+                        checked:'true'
+                    },
+                    {
+                        title:'瞎子',
+                        checked:'true'
+                    },
+                    {
+                        title:'鳄鱼',
+                        checked:'true'
+                    }
+                ]
+            },
+            computed:{
+                randoms:{
+                    get(){
+                    return this.list.every(time=>time.checked);
+                    },
+                    set(newfalse){
+                        this.list.forEach(syee=>syee.checked=newfalse)
+                        console.log(newfalse)
+                    }
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

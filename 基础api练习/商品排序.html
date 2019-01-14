@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        ul li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            color: #000;
+        }
+        .swiprs{
+            margin: 100px auto 0;
+            width: 1200px;
+        }
+        .swiprs .swiprs_sec{
+            padding-left: 20px;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background: rgba(255,123,25,0.4);
+        }
+        .swiprs .swiprs_sec div{
+            display: inline-block;
+        }
+        .swiprs .swiprs_sec div p{
+            display: inline-block;
+            margin: 0 5px;
+            padding-left: 5px; 
+            height: 25px;
+            line-height: 25px;
+            border:1px solid #000;
+        }
+        .swiprs .swiprs_sec div p span{
+            display: inline-block;
+            margin-left: 5px; 
+            width: 20px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            border-left: 1px solid #000;
+            cursor: pointer;
+        }
+        .swiprs ul{
+            width: 100%;
+            padding:20px; 
+            background: rgba(255,123,25,0.3);
+        }
+        .swiprs ul li{
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px dotted #ccc;
+        }
+        .swiprs ul li:nth-last-of-type(1){
+            border:0;
+        }
+        .swiprs ul li span{
+            display: inline-block;
+            margin-right:10px; 
+            color: #ccc;
+        }
+        .swiprs ul li a{
+            margin: 0 10px;
+        }
+        .swiprs ul li a.nos{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="swiprs" id="app">
+        <section class="swiprs_sec">
+            <span class="swiprs_sp">你的选择：</span>
+            <div>
+                <p v-for='tsts,ker in arrs'>{{tsts}}<span @click='delites(ker)'>×</span></p>
+            </div>
+        </section>
+        <ul>
+            <li v-for='time,index in cunData'>
+                <span>{{time.title}}</span>
+                <a href="javascript:;" v-for='stime,ins in time.data' @click='addck(index,ins)' :class='{nos:time.index===ins}'>{{stime}}</a>
+            </li>
+        </ul>
+    </div>
+    
+    <script>
+        var cunData=[
+        {
+            "title":"品牌",
+            "data":["苹果","小米","锤子","魅族","华为","三星","OPPO","vivo","乐视"]
+        },
+        {
+            "title":"尺寸",
+            "data":["4.0-4.5英寸","4.6-4.9英寸","5.0-5.5英寸","6.0英寸以上"]
+        },
+        {
+            "title":"系统",
+            "data":["android","ios","window","phone","无","其他"]   
+        },
+        {
+            "title":"网络",
+            "data":["联通3G","双卡单4G","双卡双4G","联通4G"]  
+        }
+    ]
+    cunData.forEach(timd=>timd.index=-1);
+    let vm=new Vue({
+        el:'#app',
+        data:{
+            cunData,
+            arrs:{}
+        },
+        methods:{
+            addck(index,ins){
+                vm.$set(this.arrs,index,this.cunData[index].data[ins]);
+                this.cunData[index].index=ins;
+            },
+            delites(ker){
+                this.$delete(this.arrs,ker);
+                this.cunData[ker].index=-1;
+                var aa=this.$delete(this.cunData,ker);
+                console.log(aa);
+            }
+        }
+    })
+    </script>
+</body>
+</html>

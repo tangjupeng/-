@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <style>
+    
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul li{
+            list-style: none;
+            cursor: pointer;
+        }
+        section{
+            padding: 100px;
+        }
+        ul li:hover{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <selecto v-bind:list='list1'></selecto>
+        <selecto v-bind:list='list2'></selecto>
+    </div>
+
+    <script>
+    
+    Vue.component('selecto',{
+        data:function(){
+            return {
+                showC:false,
+                all:''
+            }
+        },
+        props:["list"],
+        template:`<section>
+            <input type="text" v-model='all' class="inp" @click="showC=!showC"><input type="button" value="按钮">
+            <ul v-show='showC'>
+                <li v-for='itme in list' @click="chufa(itme)">{{itme}}</li>
+            </ul>
+        </section>`,
+        methods:{
+            chufa(itme){
+                this.all=itme
+            }
+        }
+    });
+    new Vue({
+        el:'#app',
+        data:{
+            list1:['上海','北京','广州'],
+            list2:['2018-12-12','2018-12-13','2018-12-14']
+        }
+    })
+    
+    </script>
+</body>
+</html>

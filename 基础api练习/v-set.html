@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{mesage.halo}}</p>
+        <p>{{mesage.age}}</p>
+    </div>
+
+
+    <script>
+
+     var vm=new Vue({
+        el:'#app',
+        data:{
+            mesage:{}
+        }
+    });     
+    Vue.set(vm.mesage,'halo','hello');   // 没有在datan里定义数据时这样加数据，第一个参数是要改变的元素，第二个是要改的地方，第三是要改的内容
+    // vm.mesage.halo='aa';     //直接这样加不行
+
+  o=Object.assign({},vm.mesage,{age:'456'});  //可以合并对象，第一个参数是返回后的值，如果不写返回后的值相等，后面是要合并的对象
+    console.log(o===vm.mesage);
+    </script>
+</body>
+</html>

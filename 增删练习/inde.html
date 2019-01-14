@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    .box{
+        margin: 100px auto 0;
+        width: 500px;
+        box-shadow: 0 0 10px 3px #000; 
+    }
+    .box_1{
+        padding-left: 10px; 
+        height: 50px;
+        border-bottom:1px solid #ccc; 
+    }
+    .box_1 input:nth-of-type(1){
+        margin-right: 10px;
+    }
+    .box_1 .inpus_1{
+        padding-left: 15px; 
+        width: 466px;
+        height: 49px;
+        outline: none;
+        border: 0;
+    }
+    .box_2{
+        width: 100%;
+    }
+    .box_2 ul li{
+        position: relative;
+        padding-left: 10px; 
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        list-style: none;
+        border-bottom: 1px solid #ccc; 
+    }
+    .box_2 ul li div input{
+        margin-right: 10px;
+    }
+    .box_2 ul li input:nth-of-type(2){
+        position: absolute;
+        top: 1px;
+        left: 33px;
+        padding-left: 10px; 
+        width: 466px;
+        height: 48px;
+        outline: none;
+        display: none;
+    }
+    .box_2 ul li span.ontext{
+        text-decoration: line-through;
+        color: #ccc;
+    }
+    .box_2 ul li input.onbox{
+        display: block;
+    }
+    .box_2 ul li p{
+        float: right;
+        margin-right: 20px;
+        cursor: pointer;
+    }
+    .box_3{
+        padding-left: 10px;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+    }
+    .box_3 span{
+        margin-right: 80px;
+        color: #666;
+    }
+    .box_3 a{
+        margin: 0 10px;
+        padding: 0 5px;
+        text-decoration: none;
+        color: #666;
+    }
+    .box_3 a.nobor{
+        border: 1px solid #000;
+    }
+    </style>
+</head>
+<body>
+<p></p>
+    <div class="box" id="app">
+        <div class="box_1"><input type="checkbox" v-model="quanx"><input type="text" ref="xier" class="inpus_1" @keyup.13="create"></div>
+        <div class="box_2" v-show="datas.length">
+            <ul>
+                <li v-for=" item,index in datas">
+                    <div>
+                        <input type="checkbox" v-model="item.selects">
+                        <span :class="{ontext:item.selects}" @dblclick="dbclicks(index)">{{item.title}}</span>
+                        <p @click="deletes(index)">x</p>
+                        <input type="text" ref="dbls" v-model="item.title" @blur="blurs(index)" @keydown.13="blurs(index)" @keydown.esc="escbao">
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="box_3" v-show="datas.length">
+            <span>{{weix}}条未选中</span>
+            <a href="#" class="nobor">all</a>
+            <a href="#">active</a>
+            <a href="#">complead</a>
+        </div>
+    </div>
+    
+    <script>
+        
+    let datas=JSON.parse(localStorage.getItem('miaov-12-20'))||[];
+    console.log(datas)
+
+    new Vue({
+        el:'#app',
+        data:{
+            datas
+        },
+        computed:{
+            quanx:{
+                get(){
+                    return this.datas.every(time=>time.selects) 
+                },
+                set(newzhi){
+                    this.datas.forEach(time=>time.selects=newzhi);
+                }
+            },
+            weix(){
+                return this.datas.filter(time=>!time.selects).length;
+            }
+        },
+        watch:{
+            datas:{
+                deep:true,
+                handler:function(newData){
+                    localStorage.setItem('miaov-12-20',JSON.stringify(newData));
+                }
+            }
+        },
+        methods:{
+            create(ev){
+                var val=ev.target.value.trim();
+                if(val==''){
+                    return
+                }
+                this.datas.push(
+                    {
+                        id: Date.now(),
+                        title:ev.target.value,
+                        selects:false 
+                    }
+                )
+                ev.target.value="";
+            },
+            deletes(j){
+                this.datas.splice(j,1);
+            },
+            dbclicks(i){
+                this.$refs.dbls[i].className='onbox'
+                this.$nextTick(()=>{
+                    this.$refs.dbls[i].focus();
+                });
+            },
+            blurs(z){
+                this.$refs.dbls[z].className=''
+            },
+            escbao(){
+                console.log(123)
+            }
+        }
+    })
+
+
+    </script>
+</body>
+</html>

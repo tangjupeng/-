@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <style>
+    
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    .red{background: red}
+    /* #app div{display: none} */
+
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <input type="button" v-for="timte,i in newData" v-bind:value="timte.title" :class='{red:index===i}' v-on:click="anniu(i)">
+        <div v-for="titse,j in newData" v-bind:style="{display:index===j?'block':'none'}">
+           <p v-for="shish in titse.bugData">{{shish.bugTitle}}</p>
+        </div>
+    </div>
+
+    <script>
+        let newData=[
+            {
+                title:'按钮1',
+                bugData:[
+                    {
+                        bugTitle:'天气不好1'
+                    },
+                    {
+                        bugTitle:'天气不好2'
+                    },
+                    {
+                        bugTitle:'天气不好3'
+                    }
+                ]
+            },
+            {
+                title:'按钮2',
+                bugData:[
+                    {
+                        bugTitle:'天气很好1'
+                    },
+                    {
+                        bugTitle:'天气很好2'
+                    }
+                ]
+            },
+            {
+                title:'按钮3',
+                bugData:[
+                    {
+                        bugTitle:'天气很不好1'
+                    },
+                    {
+                        bugTitle:'天气很不好2'
+                    }
+                ]
+            }
+        ]
+        new Vue({
+            el:'#app',
+            data:{
+                newData,
+                index:0
+            },
+            methods:{
+                anniu(h){
+                    this.index=h;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

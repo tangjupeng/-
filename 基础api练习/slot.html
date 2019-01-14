@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    
+<div id="app">
+    <blog>
+        <p slot='one'>这是替换的数据1</p>
+        <p slot='two'>这是替换的数据2</p>
+        <p slot='therr'>这是替换的数据3</p>
+    </blog>
+</div>
+
+<script>
+    Vue.component('blog',{
+        template:`
+        <div>
+            <slot name='one'><div>这是数据1</div></slot>
+            <slot name='two'><div>这是数据2</div></slot>
+            <slot name='therr'><div>这是数据3</div></slot>
+        </div>
+        `
+    });
+
+    new Vue({
+        el:'#app'
+    });
+
+</script>
+
+</body>
+</html>

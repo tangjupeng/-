@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{mag}}</p>
+        <input type="text" v-on:input='inputs'>
+    </div>
+    <script>
+    
+       var vm=new Vue({
+           el:"#app",
+           data:{
+               mag:'hello world'
+           },
+           methods:{
+               inputs(ev){
+                   var ev=ev.target.value;
+                   this.mag=ev;
+               }
+           }
+
+       }); 
+
+    </script>
+</body>
+</html>

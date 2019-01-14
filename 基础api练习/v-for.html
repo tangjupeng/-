@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='val' id="inps">
+        <input type="button" value="发送" v-on:click='fasong'>
+        <ul>
+            <li v-for='time in datas'>{{time.title}}--{{time.id}}</li>
+        </ul>
+    </div>
+    <script>
+        var datas=[];
+            var vm=new Vue({
+                el:'#app',
+                data:{
+                    datas,
+                    val:'' 
+                },
+                methods:{
+                    fasong(){
+                        this.datas.push({
+                            id:Date.now(),
+                            title:this.val
+                        });
+                    //    var ins=document.getElementById('inps');
+                    //    ins.value="";
+                    this.val='';  
+                    }
+                }
+            })
+            // setTimeout(function(){
+            //     vm.datas=[
+            //         {
+            //             id:new Date().getSeconds(),
+            //             title:'及司法啥撒'
+            //         }
+            //     ]
+            //     console.log(vm.id)
+            // },2000)
+    </script>
+</body>
+</html>
