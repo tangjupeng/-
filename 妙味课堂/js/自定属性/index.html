@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul li{
+            display: inline-block;
+            list-style: none;
+            width: 100px;
+            height: 85px;
+            background: url("images/haha.png") no-repeat;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+    
+    window.onload=function(){
+        var aLi=document.getElementsByTagName('li');
+        console.log(aLi);
+        for(var i=0;i<aLi.length;i++){
+            aLi[i].onFo=true;
+            aLi[i].onclick=function(){
+                if(this.onFo){
+                    this.style.background="url('images/heie.png') no-repeat";
+                    this.onFo=false;
+                }else{
+                    this.style.background="url('images/haha.png') no-repeat";
+                    this.onFo=true;
+                }
+            }
+        }
+    }
+        
+    </script>
+</head>
+<body>
+    
+
+
+
+
+
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <!-- <div id="box"></div> -->
+    <!-- <script>
+        var obox=document.getElementById('box');
+        obox.abx=123;
+        obox.setAttribute('abc','123');
+        alert(obox.getAttribute('abc'));
+    </script> -->
+</body>
+</html>

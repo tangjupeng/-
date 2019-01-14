@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片按需</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul li{
+            float: left;
+            width: 200px;
+            height: 300px;
+            list-style: none;
+            border: 1px solid #000;
+        }
+        ul li img{
+            width: 200px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="uls">
+        <li><img _src="images/1.jpg" alt=""></li>
+        <li><img _src="images/2.gif" alt=""></li>
+        <li><img _src="images/3.gif" alt=""></li>
+        <li><img _src="images/4.gif" alt=""></li>
+        <li><img _src="images/5.gif" alt=""></li>
+        <li><img _src="images/6.jpg" alt=""></li>
+        <li><img _src="images/7.gif" alt=""></li>
+        <li><img _src="images/8.gif" alt=""></li>
+        <li><img _src="images/1.jpg" alt=""></li>
+        <li><img _src="images/2.gif" alt=""></li>
+        <li><img _src="images/3.gif" alt=""></li>
+        <li><img _src="images/4.gif" alt=""></li>
+        <li><img _src="images/5.gif" alt=""></li>
+        <li><img _src="images/6.jpg" alt=""></li>
+        <li><img _src="images/7.gif" alt=""></li>
+        <li><img _src="images/8.gif" alt=""></li>
+        <li><img _src="images/1.jpg" alt=""></li>
+        <li><img _src="images/2.gif" alt=""></li>
+        <li><img _src="images/3.gif" alt=""></li>
+        <li><img _src="images/4.gif" alt=""></li>
+        <li><img _src="images/5.gif" alt=""></li>
+        <li><img _src="images/6.jpg" alt=""></li>
+        <li><img _src="images/7.gif" alt=""></li>
+        <li><img _src="images/8.gif" alt=""></li>
+        <li><img _src="images/1.jpg" alt=""></li>
+        <li><img _src="images/2.gif" alt=""></li>
+        <li><img _src="images/3.gif" alt=""></li>
+        <li><img _src="images/4.gif" alt=""></li>
+        <li><img _src="images/5.gif" alt=""></li>
+        <li><img _src="images/6.jpg" alt=""></li>
+        <li><img _src="images/7.gif" alt=""></li>
+        <li><img _src="images/8.gif" alt=""></li>
+        <li><img _src="images/1.jpg" alt=""></li>
+        <li><img _src="images/2.gif" alt=""></li>
+        <li><img _src="images/3.gif" alt=""></li>
+        <li><img _src="images/4.gif" alt=""></li>
+        <li><img _src="images/5.gif" alt=""></li>
+        <li><img _src="images/6.jpg" alt=""></li>
+        <li><img _src="images/7.gif" alt=""></li>
+        <li><img _src="images/8.gif" alt=""></li>
+        <li><img _src="images/1.jpg" alt=""></li>
+        <li><img _src="images/2.gif" alt=""></li>
+        <li><img _src="images/3.gif" alt=""></li>
+        <li><img _src="images/4.gif" alt=""></li>
+        <li><img _src="images/5.gif" alt=""></li>
+        <li><img _src="images/6.jpg" alt=""></li>
+        <li><img _src="images/7.gif" alt=""></li>
+        <li><img _src="images/8.gif" alt=""></li>
+        <li><img _src="images/1.jpg" alt=""></li>
+        <li><img _src="images/2.gif" alt=""></li>
+        <li><img _src="images/3.gif" alt=""></li>
+        <li><img _src="images/4.gif" alt=""></li>
+        <li><img _src="images/5.gif" alt=""></li>
+        <li><img _src="images/6.jpg" alt=""></li>
+        <li><img _src="images/7.gif" alt=""></li>
+        <li><img _src="images/8.gif" alt=""></li>
+    </ul>
+    <script>
+        var uls=document.getElementById('uls');
+        var aimg=uls.getElementsByTagName('img');
+        
+        gethoun();
+window.onscroll=gethoun;
+function gethoun(){
+    var scrolls=document.documentElement.scrollTop||document.body.scrollTop;
+    for(var i=0;i<aimg.length;i++){       //但是for循环还是会继续
+            if(!aimg[i].pangd && tops(aimg[i])<scrolls+document.documentElement.clientHeight){  //图片到顶部的距离小于（滚轮距离加可视区高）就加载
+                aimg[i].src=aimg[i].getAttribute('_src');
+                aimg[i].pangd=true;   //加载的就不会再加载
+            }
+        }
+}
+    
+        function tops(obj){   //计算图片到顶部的top值
+            var ts=0;
+            while(obj){
+                ts+=obj.offsetTop;
+                obj=obj.offsetParent;
+            }
+            return ts;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            position: relative;
+            margin: 100px auto;
+            padding: 10px 0;
+            width: 400px;
+            border: 1px solid #eee;
+            text-align: center;
+        }
+        .box_1 p{
+            display: inline-block;
+            padding: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .box_2{
+            width: 100%;
+        }
+        .box_2 p{
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+        }
+        .box_2 img{
+            width: 100%;
+            height: 400px;
+            background: #f1f1f1;
+        }
+        .box_3 span{
+            position: absolute;
+            top: 50%;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid #999;
+            border-radius: 50%;
+            font-size: 26px;
+            color: red;
+            cursor:pointer;
+        }
+        .box_3 span:nth-of-type(1){
+            left: 0;
+        }
+        .box_3 span:nth-of-type(2){
+            right: 0;
+        }
+        .ons{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="box_1">
+            <p id="ps1" class="ons">循环播放</p>
+            <p id="ps2">单机播放</p>
+        </div>
+        <div class="box_2">
+            <p id="ps3">1/4</p>
+            <img src="" alt="" id="imgs">
+            <p id="ps4">名字</p>
+        </div>
+        <div class="box_3">
+            <span id="span1">&lt;</span>
+            <span id="span2">&gt;</span>
+        </div>
+    </div>
+    <script>
+        var ps1=document.getElementById('ps1'),
+        ps2=document.getElementById('ps2'),
+        ps3=document.getElementById('ps3'),
+        ps4=document.getElementById('ps4'),
+        imgs=document.getElementById('imgs'),
+        span1=document.getElementById('span1'),
+        span2=document.getElementById('span2');
+        var arr=['images/1.jpg','images/2.jpg','images/3.jpg','images/4.jpg'];
+        var arr1=['哈哈','嘿嘿','呵呵','嘻嘻'];
+        var cun=0;
+        var offon=true;
+        hahas();
+        function hahas(){
+            ps3.innerHTML=cun+1+'/'+arr1.length;
+            ps4.innerHTML=arr1[cun];
+            imgs.src=arr[cun];
+        }
+        ps1.onclick=function(){
+            ps1.className="ons";
+            ps2.className="";
+            offon=true;
+        }
+        ps2.onclick=function(){
+            ps1.className="";
+            ps2.className="ons";
+            offon=false;
+        }
+        span1.onclick=function(){
+            cun--;
+            if(cun==-1){
+                if(offon){
+                    cun=arr1.length-1;
+                }else{
+                    cun=0;
+                    alert("这是第一张")
+                }
+            }
+            hahas();
+        }
+        span2.onclick=function(){
+            cun++;
+            if(cun==arr1.length){
+                if(offon){
+                    cun=0;
+                }else{
+                    cun=arr1.length-1;
+                    alert("这是最后一张了");
+                }
+            }
+            hahas();
+        }
+    </script>
+</body>
+</html>

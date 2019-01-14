@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            margin: 100px auto 0;
+            padding: 10px;
+            width: 400px;
+            border: 8px solid #ccc;
+            color: red;
+            background: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>
+            <span>【学习进行时】金秋九月，习近平总书记活动行程一如既往地密集繁忙，“振兴”是他在各种内政外交场合始终强
+                调的一条主线。新华社《学习进行时》原创品牌栏目“讲习所”推出文章，以“振兴”作关键词，为您梳理回顾。
+                金秋九月，习近平国内活动紧张繁忙：主持会议、考察调研脚步不停歇；外交日程密集紧凑：中非盛会大幕甫落，
+                又开启俄罗斯之行……纵览习近平九月活动，“振兴”是贯穿始终的一条主线。
+            </span>..... <a href="javascript:;"> >>展开 </a>
+        </p>
+    </div>
+    <script>
+        var ospan=document.getElementsByTagName('span')[0];
+        var oa=document.getElementsByTagName('a')[0];
+        var str=ospan.innerHTML;
+        var thst=true;
+        ospan.innerHTML=str.slice(0,18);
+        oa.onclick=function(){
+            if(thst){
+            ospan.innerHTML=str;
+            }else{
+             ospan.innerHTML=str.slice(0,18);
+        }
+        thst=!thst;
+        }
+    </script>
+</body>
+</html>

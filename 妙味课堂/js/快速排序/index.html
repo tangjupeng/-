@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>快速排序</title>
+</head>
+<body>
+    
+
+    <script>
+        function paix(arr){
+
+            if(arr.length<=1){
+                return arr;
+            }
+            var num=Math.floor(arr.length/2);
+            var numVa=arr.splice(num,1);
+            var lefts=[];
+            var rights=[];
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]<numVa){
+                    lefts.push(arr[i]); 
+                }else{
+                    rights.push(arr[i]);     
+                }
+            }
+            console.log(rights);
+            return  paix(lefts).concat(numVa,paix(rights));
+
+        }
+        //alert(paix([12,5,20,6,17,30,40,50]));
+
+        function aaa(){
+            var a=1;
+            a++;
+            return alert(a);
+        }
+        aaa();
+        aaa();
+        aaa();
+    </script>
+</body>
+</html>

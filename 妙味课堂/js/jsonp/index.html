@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jsonp</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            margin:  100px auto 0; 
+            width: 500px;
+        }
+    #inp{
+        width: 300px;
+        height: 50px;
+        outline: none;
+        box-sizing: border-box;
+    }
+    #uls li{
+        list-style: none;
+    }
+    #uls{
+        width: 300px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        display: none;
+    }
+    li{
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+    }
+    a{
+        display: block;
+        width: 100%;
+        padding-left: 10px; 
+        text-decoration: none;
+        color: #000;
+    }
+    a:hover{
+        background: yellow;
+    }
+    </style>
+</head>
+<body>
+    
+    <div>
+        <input type="text" id="inp">
+        <ul id="uls">
+            <!-- <li> <a href="#">1111</a></li>
+            <li> <a href="#">1111</a></li>
+            <li> <a href="#">1111</a></li>
+            <li> <a href="#">1111</a></li> -->
+        </ul>
+    </div>
+    <script>
+        var uls=document.getElementById("uls");
+        var inp=document.getElementById("inp");
+        inp.onkeyup=function(){
+            if(this.value!=""){
+                var srcs=document.createElement("script");
+           srcs.src="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+this.value+"&cb=tangs"
+           document.body.appendChild(srcs);
+            }else{
+                uls.style.display="none";
+            }
+        }
+        function tangs(data){
+            console.log(data.s);
+            if(data.s.length){
+                var htmls="";
+                for(var i=0;i<data.s.length;i++){
+                    htmls+="<li> <a href='https://www.baidu.com/s?wd="+data.s[i]+"' target='_blank'>"+data.s[i]+"</a></li>"
+                }
+                console.log(htmls);
+                uls.innerHTML=htmls;
+                uls.style.display="block";
+                
+            }
+        }
+    </script>
+</body>
+</html>

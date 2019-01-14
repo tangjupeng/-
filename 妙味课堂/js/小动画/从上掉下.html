@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            position: absolute;
+            top: 10px;
+            width: 50px;
+            height: 50px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    
+    <script>
+        var adiv=document.getElementsByTagName('div');
+        var num=20;
+        var srt='';
+        var shsih=0;
+        var inte=null;
+
+        for(var i=0;i<num;i++){
+            srt+='<div style="left:'+i*60+'px"></div>'
+        }
+        document.body.innerHTML=srt;
+
+
+    
+
+            document.onclick=function(){
+                if(getAttr(adiv[0],'top')=='10px'){
+                    clearInterval(inte);
+                inte=setInterval(function(){
+                fn(adiv[shsih],'top',25,500)
+                shsih++;
+                console.log(shsih);
+                if(shsih==num){
+                    clearInterval(inte);
+                    }
+                },100)  
+              }
+            if(getAttr(adiv[num-1],'top')=='500px'){
+              if(getAttr(adiv[0],'top')=='500px'){
+                    clearInterval(inte);
+                inte=setInterval(function(){
+                    console.log(shsih)
+                fn(adiv[shsih-1],'top',25,10)
+                shsih--;
+                console.log(shsih);
+                if(shsih==0){
+                    clearInterval(inte);
+                    }
+                },100)  
+              }
+        }
+    }
+
+        function fn(obj,attr,buchang,mubiao,fnEnd){
+            buchang=parseInt(getAttr(obj,attr))<mubiao?buchang:-buchang;
+            clearInterval(obj.imte);
+            obj.imte=setInterval(function(){
+                var lf=parseInt(getAttr(obj,attr))+buchang;
+                if(lf>mubiao&&buchang>0){
+                    lf=mubiao; 
+                }
+                if(lf<mubiao&&buchang<0){
+                    lf=mubiao; 
+                }
+                obj.style[attr]=lf+'px';
+                if(lf==mubiao){
+                    clearInterval(obj.imte);
+                    fnEnd&&fnEnd();
+                }
+            },50);
+        }
+        function getAttr(obj,attr){
+            // return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+            return getComputedStyle(obj)?getComputedStyle(obj)[attr]:obj.currentStyle[attr];
+        }
+        
+    </script>
+</body>
+</html>

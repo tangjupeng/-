@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing:border-box;
+        }
+        #divs{
+            margin: 100px auto 0;
+            width: 400px;
+            height: 40px;
+            font-size: 0;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        #divs a{
+            display: inline-block;
+            margin: 0 10px;
+            width: 66px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #000;
+        }
+        #divs_1{
+            margin: 20px auto 0;
+            width: 300px;
+            height: 30px;
+            font-size: 0;
+            text-align: center;
+            border: 1px solid red;
+            display: none;
+        }
+        #divs_1 a{
+            display: inline-block;
+            margin: 0 10px;
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="divs">
+        <a href="#">第1个</a>
+        <a href="#">第2个</a>
+        <a href="#">第3个</a>
+        <a href="#">第4个</a>
+    </div>
+    <div id="divs_1">
+    </div>
+    <script>
+        var odiv=document.getElementById('divs');
+        var adivs=document.getElementById('divs_1');
+        var Ads=odiv.getElementsByTagName('a');
+        var times=null;
+        var timeout=null;
+        for(var i=0;i<Ads.length;i++){
+            Ads[i].index=i;
+            Ads[i].onmouseover=show;
+            Ads[i].onmouseout=hide;
+        }
+        var arr=[[1,1,1,1],[2,2,2,2],[3,3,3,3],[4,4,4,4]];
+        var ons='';
+
+        adivs.onmouseover=function(){
+            clearTimeout(times);
+        };
+        adivs.onmouseout=function(){
+            times=setTimeout(function(){
+            adivs.style.display='none';
+        },1000);
+        };
+
+       function show(){
+           
+            clearTimeout(times);
+            Ads[this.index].style.background='red';
+            adivs.style.display='block';
+            ons=''
+            for(var j=0;j<arr.length;j++){
+                    ons+='<a href="#">'+arr[this.index][j]+'</a>'        
+            }
+            adivs.innerHTML=ons;
+       }
+       function hide(){
+           var tsh=this.index;
+        Ads[tsh].style.background='';
+        times=setTimeout(function(){
+            adivs.style.display='none';
+        },1000);
+       }
+    </script>
+</body>
+</html>

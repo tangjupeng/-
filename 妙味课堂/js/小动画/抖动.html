@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            position: absolute;
+            top: 200px;
+            left: 500px;
+            width: 200px;
+            height: 350px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    
+    <div>1</div>
+    <script>
+        var odiv=document.getElementsByTagName('div')[0];
+        // var cun=0;
+        // var imte=null;
+        // var arr=[];
+        // for(var i=20;i>0;i-=2){
+        //     arr.push(i,-i)  
+        // }
+        // arr.push(0)  
+        // console.log(arr);
+        // odiv.onmouseover=function(){
+        //     var thid=this;
+        //     clearInterval(imte);
+        //     imte=setInterval(function(){
+        //         cun++;
+        //         if(cun==21){
+        //             cun=0;
+        //             clearInterval(imte);
+        //         }
+        //         var dou=parseInt(fn(odiv,'left'));
+        //         thid.style.left=dou+arr[cun]+'px';
+
+        //     },50);
+        // }
+
+
+
+        // function fn(obj,attr){
+        //     return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+        // }
+
+        odiv.onmouseover=function(){
+            doud(odiv,'left');
+        }
+        function doud(obj,attrs ){
+            var cun=0;
+            var imte=null;
+            var arr=[];
+            for(var i=20;i>0;i-=2){
+                arr.push(i,-i)  
+             }
+                arr.push(0)  
+            clearInterval(imte);
+            imte=setInterval(function(){
+                var dou=parseInt(fn(obj,attrs));
+                obj.style[attrs]=dou+arr[cun]+'px';
+                cun++;
+                if(cun==arr.length){
+                   
+                    clearInterval(imte);
+                }
+                console.log(arr)
+            },50);
+
+            function fn(obj,attr){
+            return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+              }  
+        }
+
+    </script>
+</body>
+</html>

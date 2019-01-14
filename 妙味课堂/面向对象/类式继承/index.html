@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>类式继承</title>
+</head>
+<body>
+    
+    <script>
+        
+        function jic(){    //父级
+            this.name=[1,2,3];
+        }
+        jic.prototype.mehods=function(){
+            alert(this.name);
+        }
+
+        function zij(){    //子级
+            jic.call(this)     //继承属性
+        }
+        var fn=function(){};         //继承方法 ，这4步
+        fn.prototype=jic.prototype;
+        zij.prototype=new fn();
+        zij.prototype.constructor=zij;    //修正指向问题
+        var bss=new jic();
+        bss.name.push(4);
+        var haha=new zij();
+        alert(bss.name);
+
+        var as=/[0-3]/;
+        var ab=[2,3,4];
+        var bb=[];
+        for(var i=0;i<ab.length;i++){
+            bb.push(as.exec(ab[i])?as.exec(ab[i]):'没有了')
+        }
+        console.log(bb);
+    </script>
+</body>
+</html>

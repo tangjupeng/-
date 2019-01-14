@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <script>
+        // var div1=document.getElementById('div1');
+        // var divx=0;
+        // var divy=0;
+
+        // function drags(ev){
+        //     var ev=ev||window.event;
+        //         divx=ev.clientX-div1.offsetLeft;
+        //         divy=ev.clientY-div1.offsetTop;
+        //         document.onmousemove=moves;
+        //         document.onmouseup=ups;
+        //         return false;
+        // }
+        // function moves(ev){
+        //         var ev=ev||window.event;
+        //         div1.style.top=ev.clientY - divy+'px'; 
+        //         div1.style.left=ev.clientX - divx+'px'; 
+        // }
+        // function ups(){
+        //         document.onmouseup=null;
+        //         document.onmousemove=null;
+        // }
+
+        function Tuozs(){
+            this.div1=document.getElementById('div1');
+            this.divx=0;
+            this.divy=0;
+        }
+        Tuozs.prototype.init=function(){
+            var This=this;
+            this.div1.onmousedown=function(ev){
+                var ev=ev||window.event;
+                This.drags(ev);
+                return false;
+            };
+        }
+        Tuozs.prototype.drags=function(ev){
+            var This=this;
+            this.divx=ev.clientX-div1.offsetLeft;
+            this.divy=ev.clientY-div1.offsetTop;
+                document.onmousemove=function(ev){
+                    var ev=ev||window.event;
+                    This.moves(ev);
+                };
+                document.onmouseup=this.ups;
+        }    
+        Tuozs.prototype.moves=function(ev){
+                this.div1.style.top=ev.clientY - this.divy+'px'; 
+                this.div1.style.left=ev.clientX - this.divx+'px'; 
+        }   
+        Tuozs.prototype.ups=function(){
+                document.onmouseup=null;
+                document.onmousemove=null;
+        } 
+        var tuoz=new Tuozs();
+        tuoz.init();
+    </script>
+</body>
+</html>

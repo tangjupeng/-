@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul li{
+            list-style: none;
+        }
+        .ul{
+            margin:  100px auto 0;
+            width: 400px;
+        }
+        .list{
+            width: 300px;
+            border-bottom: 1px solid #fff;
+
+        }
+        h2{
+            width: 300px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            background: red;
+            color: #fff;    
+        }
+        h2.h2_1{
+            color: #fff;
+            background: #000;
+        }
+        .uls{
+            width: 300px;
+            display: none;
+        }
+        .uls li{
+            width: 300px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: #ccc;
+            border-bottom: 1px solid #000;
+        }
+        .uls li.lik{
+            background: yellow;
+        }
+    </style>
+    <script>
+    window.onload=function(){
+        var aH2=document.getElementsByTagName('h2');
+        var aUls=document.getElementsByClassName('uls');
+        console.log(aUls);
+        var aLi=null;
+        var arrLi=[];
+        for(var i=0;i<aH2.length;i++){
+            aH2[i].index=i;
+            aH2[i].ons=true;
+            aH2[i].onclick=function(){
+                if(this.ons){
+                    this.className="h2_1";
+                    aUls[this.index].style.display="block";
+                    this.ons=false;
+                }else{
+                    this.className="";
+                    aUls[this.index].style.display="none";
+                    this.ons=true;
+                }
+            }
+        }
+        for(var j=0;j<aUls.length;j++){
+            aLi= aUls[j].getElementsByTagName('li');
+            for(var k=0;k<aLi.length;k++){
+                arrLi.push(aLi[k]);
+            }
+        }
+        console.log(aLi);
+
+        for(var o=0;o<arrLi.length;o++){
+            arrLi[o].onclick=function(){
+                for(var i=0;i<arrLi.length;i++){
+                    arrLi[i].className='';
+                }
+                this.className='lik'; 
+            }
+        }
+    } 
+    
+    </script>
+</head>
+<body>
+   <ul class="ul">
+       <li class="list">
+           <h2>好友</h2>
+           <ul class="uls">
+               <li>瞎子</li>
+               <li>蛮王</li>
+               <li>润文</li>
+           </ul>
+       </li>
+       <li class="list">
+            <h2>队友</h2>
+            <ul class="uls">
+                <li>瞎子</li>
+                <li>蛮王</li>
+                <li>润文</li>
+            </ul>
+        </li>
+        <li class="list">
+            <h2>黑名单</h2>
+            <ul class="uls">
+                <li>瞎子</li>
+                <li>蛮王</li>
+            </ul>
+        </li>
+   </ul>
+</body>
+</html>

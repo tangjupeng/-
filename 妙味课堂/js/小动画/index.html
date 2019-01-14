@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #dis{
+            position: relative;
+            margin-top: 100px;
+        }
+        input{
+            margin-left: 10px;
+        }
+        .divs{
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="dis">
+        <input type="button" value="向后">
+        <input type="button" value="向前">
+        <div class="divs"></div>
+    </div>
+    <script>
+        var btn=document.getElementsByTagName('input');
+        var div=document.getElementsByClassName('divs')[0];
+        // btn[0].onclick=function(){
+        //     clearInterval(div.imte);
+        //     div.imte=setInterval(function(){
+        //         var lf=parseInt(div.currentStyle?div.currentStyle.left:getComputedStyle(div).left)+-12;
+        //         if(lf<10){
+        //             lf=10; 
+        //         }
+        //         div.style.left=lf+'px';
+        //         if(lf==10){
+        //             clearInterval(div.imte);
+        //         }
+        //     },50);
+        // }
+        // btn[1].onclick=function(){
+        //     clearInterval(div.imte);
+        //     div.imte=setInterval(function(){
+        //         var lf=parseInt(div.currentStyle?div.currentStyle.left:getComputedStyle(div).left)+12;
+        //         if(lf>800){
+        //             lf=800; 
+        //         }
+        //         div.style.left=lf+'px';
+        //         if(lf==800){
+        //             clearInterval(div.imte);
+        //         }
+        //     },50);
+        // }
+        btn[0].onclick=function(){
+            fn(div,'left',12,10)
+        };
+        btn[1].onclick=function(){
+            fn(div,'left',12,800,function(){
+                alert(123);
+            })
+        };
+        function fn(obj,attr,buchang,mubiao,fnEnd){
+            buchang=parseInt(obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr])<mubiao?buchang:-buchang;
+            clearInterval(obj.imte);
+            obj.imte=setInterval(function(){
+                var lf=parseInt(obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr])+buchang;
+                if(lf>mubiao&&buchang>0){
+                    lf=mubiao; 
+                }
+                if(lf<mubiao&&buchang<0){
+                    lf=mubiao; 
+                }
+                obj.style[attr]=lf+'px';
+                if(lf==mubiao){
+                    clearInterval(obj.imte);
+                    fnEnd&&fnEnd();
+                }
+            },50);
+        }
+    </script>
+</body>
+</html>

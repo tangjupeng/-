@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        ul li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            color: #000;
+        }
+        .swiprs{
+            margin: 100px auto 0;
+            width: 1200px;
+        }
+        .swiprs .swiprs_sec{
+            padding-left: 20px;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background: rgba(255,123,25,0.4);
+        }
+        .swiprs .swiprs_sec div{
+            display: inline-block;
+        }
+        .swiprs .swiprs_sec div p{
+            display: inline-block;
+            margin: 0 5px;
+            padding-left: 5px; 
+            height: 25px;
+            line-height: 25px;
+            border:1px solid #000;
+        }
+        .swiprs .swiprs_sec div p span{
+            display: inline-block;
+            margin-left: 5px; 
+            width: 20px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            border-left: 1px solid #000;
+            cursor: pointer;
+        }
+        .swiprs ul{
+            width: 100%;
+            padding:20px; 
+            background: rgba(255,123,25,0.3);
+        }
+        .swiprs ul li{
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px dotted #ccc;
+        }
+        .swiprs ul li:nth-last-of-type(1){
+            border:0;
+        }
+        .swiprs ul li span{
+            display: inline-block;
+            margin-right:10px; 
+            color: #ccc;
+        }
+        .swiprs ul li a{
+            margin: 0 10px;
+        }
+        .swiprs ul li a.nos{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="swiprs">
+        <section class="swiprs_sec">
+            <span class="swiprs_sp">你的选择：</span>
+            <div>
+                <!-- <p>苹果<span>×</span></p> -->
+            </div>
+        </section>
+        <ul>
+            <!-- <li>
+                <span>品牌</span>
+                <a href="javascript:;">苹果</a>
+                <a href="javascript:;">苹果</a>
+                <a href="javascript:;">苹果</a>
+                <a href="javascript:;">苹果</a>
+                <a href="javascript:;">苹果</a>
+                <a href="javascript:;">苹果</a>
+            </li>
+            <li>
+                    <span>品牌</span>
+                    <a href="javascript:;">苹果</a>
+                    <a href="javascript:;">苹果</a>
+                    <a href="javascript:;">苹果</a>
+                    <a href="javascript:;">苹果</a>
+                    <a href="javascript:;">苹果</a>
+                    <a href="javascript:;">苹果</a>
+                </li>
+                <li>
+                        <span>品牌</span>
+                        <a href="javascript:;">苹果</a>
+                        <a href="javascript:;">苹果</a>
+                        <a href="javascript:;">苹果</a>
+                        <a href="javascript:;">苹果</a>
+                        <a href="javascript:;">苹果</a>
+                        <a href="javascript:;">苹果</a>
+                    </li> -->
+        </ul>
+    </div>
+    
+    <script>
+        var cunData=[
+        {
+            "title":"品牌",
+            "data":["苹果","小米","锤子","魅族","华为","三星","OPPO","vivo","乐视"]
+        },
+        {
+            "title":"尺寸",
+            "data":["4.0-4.5英寸","4.6-4.9英寸","5.0-5.5英寸","6.0英寸以上"]
+        },
+        {
+            "title":"系统",
+            "data":["android","ios","window","phone","无","其他"]   
+        },
+        {
+            "title":"网络",
+            "data":["联通3G","双卡单4G","双卡双4G","联通4G"]  
+        }
+    ]
+
+    var oul=document.querySelector("ul");
+    var len=cunData.length;
+    for(var i=0;i<len;i++){
+        var ali=document.createElement("li");
+        var aspan=document.createElement("span");
+        aspan.innerText=cunData[i].title;
+        oul.appendChild(ali);
+        ali.appendChild(aspan);
+        for(var j=0;j<cunData[i].data.length;j++){
+            var aA=document.createElement("a");
+            aA.href="javascript:;";
+            aA.innerText=cunData[i].data[j];
+            ali.appendChild(aA);
+        }
+    }
+    var alii=oul.children;
+    var aAs=null;
+    var objs={};   //用对象的下标的唯一性，存值
+   for(var k=0;k<alii.length;k++){
+    aAs=alii[k].querySelectorAll("a");
+    alii[k].presb=null; //区别每一行的a,把a放里面
+    alii[k].indexs=k;   //存的li的下标
+    for(var m=0;m<aAs.length;m++){
+        aAs[m].onclick=function(){
+            var parent=this.parentNode; //点击a标签的父级
+            objs[parent.indexs]=this.innerText; //存的每行唯一的a值
+
+
+            fns();   //插入选择的函数
+
+                if(parent.presb){
+                    parent.presb.className="";
+            }
+            this.className="nos";
+            parent.presb=this; //点击之后记录点击的元素
+         }
+    }
+   }
+
+   var div=document.querySelector('.swiprs_sec div'); //找到要插入的div
+
+   function fns(){
+    var html='';   
+   for(var i=0;i<alii.length;i++){   //因为对象没有顺序，所以用的for,每排就一个所以用的li的下标
+       if(objs[i]){   //对象有才执行
+        html+=`<p>${objs[i]}<span data-index='${i}'>×</span></p>`;   //插入到你的选择
+       }
+        
+   }
+   div.innerHTML=html;
+
+        var aospan=div.querySelectorAll('span');
+        for(var t=0;t<aospan.length;t++){
+            aospan[t].onclick=function(){
+                this.parentNode.parentNode.removeChild(this.parentNode);
+
+                //删数据
+                 //行间属性用data-开头 this.dataset是下标对象
+                //  console.log(this.dataset);
+                
+                // console.log(this.dataset.index) 就是你点击的属性值
+          
+                // delete objs[this.getAttribute('data-index')]; 这样一样可以找到下标
+                delete objs[this.dataset.index]; 
+
+                //取掉a选择的高亮，利用的a都存在li的presb属性里    
+                alii[this.dataset.index].presb.className="";
+            }
+        }
+
+   }
+    </script>
+</body>
+</html>

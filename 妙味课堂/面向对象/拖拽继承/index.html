@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽继承</title>
+    <style>
+        #div1{width: 100px;height: 100px; background: red;position: absolute;}
+        #div2{width: 100px;height: 100px; background: yellow;position: absolute;left: 100px;}
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <script>
+        // var div1=document.getElementById('div1');
+        // var div2=document.getElementById('div2');
+        // div1.onmousedown=function(ev){
+        //     var ev=ev||window.event;
+        //     var divX=ev.clientX-div1.offsetLeft;
+        //     var divY=ev.clientY-div1.offsetTop;
+        //     document.onmousemove=function(ev){
+        //         var ev=ev||window.event;
+        //         div1.style.left=ev.clientX-divX+'px';
+        //         div1.style.top=ev.clientY-divY+'px';
+        //     }
+        //     document.onmouseup=function(){
+        //         document.onmousemove=document.onmouseup=null;
+        //     }
+        // }
+
+
+        function droge(id1){
+            this.div1=document.getElementById(id1);
+        }
+        droge.prototype.init=function(){
+            var This=this;
+            this.div1.onmousedown=function(ev){
+                var ev=ev||window.event;
+                This.anxia(ev);
+                return false;
+            };
+        } 
+        droge.prototype.anxia=function(ev){
+            var This=this;
+           this.divX=ev.clientX-this.div1.offsetLeft;
+           this.divY=ev.clientY-this.div1.offsetTop;
+            document.onmousemove=function(ev){
+                var ev=ev||window.event;
+                This.yidong(ev);
+            };
+            document.onmouseup=this.taiq;
+        }
+        droge.prototype.yidong=function(ev){
+            this.div1.style.left=ev.clientX-this.divX+'px';
+            this.div1.style.top=ev.clientY-this.divY+'px';
+        }
+        droge.prototype.taiq=function(){
+                document.onmousemove=document.onmouseup=null;
+        }
+
+        function jicheng(id1){
+            droge.call(this,id1);
+        }
+        extent(droge.prototype,jicheng.prototype);
+
+        jicheng.prototype.yidong=function(ev){
+            var L=ev.clientX-this.divX;
+            var T=ev.clientY-this.divY;
+            console.log(L);
+            if(L<0){
+                L=0;
+            }else if(L>document.documentElement.clientWidth-this.div1.offsetWidth){
+                L=document.documentElement.clientWidth-this.div1.offsetWidth;
+            }
+            if(T<0){
+                T=0;
+            }else if(T>document.documentElement.clientHeight-this.div1.offsetHeight){
+                T=document.documentElement.clientHeight-this.div1.offsetHeight;
+            }
+            this.div1.style.left=L+'px';
+            this.div1.style.top=T+'px';
+        }
+        function extent(obj1,obj2){
+            for(var attr in obj1){
+                obj2[attr]=obj1[attr];
+            }
+        }
+        var tuo=new droge('div1');
+        tuo.init();
+
+        var tuo2=new jicheng('div2');
+        tuo2.init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+    div{
+        position: relative;
+        margin: 100px auto 0;
+        width: 640px;
+        height: 300px;
+        border: 1px solid #000;
+        overflow: hidden;
+    }
+    ul{
+        position: absolute;
+        top: 50px;
+        left: -279px;
+        padding: 0;
+        margin: 0;
+        width: 1800px;
+        font-size: 0;
+    }
+    li{
+        display: inline-block;
+        margin-right: 20px;
+        width: 259px;
+        height: 30px;
+        font-size: 20px;
+        background: red;
+    }
+    </style>
+</head>
+<body>
+    
+    <div>
+        <ul>
+            <li>4</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>1</li>
+        </ul>
+    </div>
+<script>
+    var cun=0;
+    var itmes=null;
+    var ul=$('ul');
+    var uw=ul.width();
+    var fl=ul.position().left;
+    console.log(fl);  
+
+        setInterval(function(){
+            --cun;
+            var o=fl+cun;
+            console.log(o)
+            if(-o>1055){
+                cun=0;
+                o=0;
+            }
+            ul.css('left',o);
+        },15)
+</script>
+</body>
+</html>

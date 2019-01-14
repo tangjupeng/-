@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <div class="box">
+        <div class="box_1">
+            <a href="#">哈哈</a>
+            <a href="#">哈哈</a>
+            <a href="#">哈哈</a>
+            <a href="#">哈哈</a>
+            <a href="#">哈哈</a>
+        </div>
+        <ul class="uls">
+            <li>试试</li>
+            <li>试试</li>
+            <li>试试</li>
+            <li>试试</li>
+            <li>试试</li>
+        </ul>
+        <p class="ps">点点</p>
+    </div>
+    <script>
+        var ons=true;
+        $('.ps').click(function(){
+            if(ons){
+                $('.uls').slideDown();
+                ons=false;
+            }else{
+                $('.uls').slideUp();
+                ons=true;
+            }
+        });
+    </script>
+</body>
+</html>

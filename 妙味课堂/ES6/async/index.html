@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        function test(m){
+            m={v:5}
+        }
+        var m={k:30}
+        test(m);
+        alert(m.k)
+        
+      let tiems = (a)=>{
+            return new Promise((rel,rls)=>{
+                setTimeout(()=>{
+                    rel("执行了："+Math.random())
+                },a)
+            })
+        }
+        tiems(1000).then((datas)=>{
+            console.log(datas)
+        })
+
+       async function fn(){         //async直接返回的就是Promise而且状态是成功（resolved）
+            console.log(1);
+           let data1= await tiems(1000);            //等待,他的返回值是Promise的成功
+            console.log(2,data1);
+            let data2=await tiems(2000);
+            console.log(3,data2);
+            let data3=await tiems(3000);
+            console.log(4,data3);
+        }
+        console.log(fn())
+
+    </script>
+</body>
+</html>
